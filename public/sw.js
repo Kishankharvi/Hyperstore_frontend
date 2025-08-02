@@ -1,8 +1,7 @@
-const CACHE_NAME = 'nexus-store-cache-v2'; // Incremented version
-const API_CACHE_NAME = 'nexus-store-api-cache-v2'; // Incremented version
-const ALL_PRODUCTS_URL = '/api/products?limit=100'; // URL to fetch all products
+const CACHE_NAME = 'nexus-store-cache-v2';
+const API_CACHE_NAME = 'nexus-store-api-cache-v2';
+const ALL_PRODUCTS_URL = '/api/products?limit=100';
 
-// App Shell: The essential files for your app's UI
 const URLS_TO_CACHE = [
   '/',
   '/index.html',
@@ -11,18 +10,15 @@ const URLS_TO_CACHE = [
   '/icons/icon-512x512.png'
 ];
 
-// 1. Installation: Pre-cache the App Shell
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        console.log('Opened cache and caching app shell');
-        return cache.addAll(URLS_TO_CACHE);
-      })
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log('Opened cache and caching app shell');
+      return cache.addAll(URLS_TO_CACHE);
+    })
   );
 });
 
-// 2. Activation: Clean up old caches and fetch all products
 self.addEventListener('activate', (event) => {
   const cacheWhitelist = [CACHE_NAME, API_CACHE_NAME];
   event.waitUntil(
@@ -30,22 +26,18 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
           if (cacheWhitelist.indexOf(cacheName) === -1) {
-            console.log('Deleting old cache:', cacheName);
             return caches.delete(cacheName);
           }
         })
       );
     }).then(() => {
-      // Proactively fetch and cache all products
       console.log('Activating new service worker and fetching all products for offline use...');
       return caches.open(API_CACHE_NAME).then((cache) => {
         return fetch(ALL_PRODUCTS_URL).then((response) => {
           if (response.ok) {
-            cache.put(ALL_PRODUCTS_URL, response);
+            cache.put(ALL_PRODUCTS_URL, response.clone());
             console.log('All products cached successfully.');
           }
-        }).catch(err => {
-            console.error('Failed to fetch and cache all products:', err);
         });
       });
     })
@@ -53,35 +45,34 @@ self.addEventListener('activate', (event) => {
   return self.clients.claim();
 });
 
-// 3. Fetch: Intercept network requests
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Strategy for API calls (Stale-While-Revalidate)
+  // Strategy for API calls
   if (url.pathname.startsWith('/api/')) {
+    // **FIX**: Only cache GET requests. Ignore POST, PUT, DELETE, etc.
+    if (request.method !== 'GET') {
+      return; 
+    }
+
     event.respondWith(
       caches.open(API_CACHE_NAME).then((cache) => {
         return fetch(request)
           .then((networkResponse) => {
-            // If online, update the cache with the fresh response
             cache.put(request, networkResponse.clone());
             return networkResponse;
           })
-          .catch(() => {
-            // If offline, return the cached response
-            return cache.match(request);
-          });
+          .catch(() => cache.match(request));
       })
     );
     return;
   }
 
-  // Strategy for all other requests (Cache First, then Network)
+  // Strategy for all other requests
   event.respondWith(
     caches.match(request).then((cachedResponse) => {
       return cachedResponse || fetch(request).then((networkResponse) => {
-        // Cache newly requested assets
         return caches.open(CACHE_NAME).then((cache) => {
           cache.put(request, networkResponse.clone());
           return networkResponse;

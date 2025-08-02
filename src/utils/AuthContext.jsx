@@ -1,87 +1,87 @@
-"use client"
-
-import { createContext, useState, useEffect } from "react"
-import apiService from "./api"
+import React from "react"; // Import the full React library
+import apiService from "./api";
 import toast from 'react-hot-toast';
 
-export const AuthContext = createContext()
+// Destructure the hooks from the main React object
+const { createContext, useState, useEffect } = React;
+
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("token");
     if (token) {
-      apiService.setToken(token)
-      fetchCurrentUser()
+      apiService.setToken(token);
+      fetchCurrentUser();
     } else {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [])
+  }, []);
 
   const fetchCurrentUser = async () => {
     try {
-      const response = await apiService.getCurrentUser()
-      setUser(response.user)
+      const response = await apiService.getCurrentUser();
+      setUser(response.user);
     } catch (error) {
-      console.error("Failed to fetch current user:", error)
-      localStorage.removeItem("token")
-      apiService.setToken(null)
+      console.error("Failed to fetch current user:", error);
+      apiService.setToken(null);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const login = async (credentials) => {
     try {
-      const response = await apiService.login(credentials)
-      apiService.setToken(response.token)
-      setUser(response.user)
+      const response = await apiService.login(credentials);
+      apiService.setToken(response.token);
+      setUser(response.user);
       toast.success("Logged in successfully!");
-      return response
+      return response;
     } catch (error) {
       toast.error(error.message || "Invalid credentials");
-      throw error
+      throw error;
     }
-  }
+  };
 
   const register = async (userData) => {
     try {
-      const response = await apiService.register(userData)
-      apiService.setToken(response.token)
-      setUser(response.user)
+      const response = await apiService.register(userData);
+      apiService.setToken(response.token);
+      setUser(response.user);
       toast.success("Registration successful!");
-      return response
+      return response;
     } catch (error) {
       toast.error(error.message || "Registration failed.");
-      throw error
+      throw error;
     }
-  }
+  };
 
   const logout = async () => {
     try {
-      await apiService.logout()
-    } catch (error){
-         console.error("Logout error:", error)
+      await apiService.logout();
+    } catch (error) {
+      console.error("Logout error:", error);
     } finally {
-      apiService.setToken(null)
-      setUser(null)
+      apiService.setToken(null);
+      setUser(null);
       toast.success("Logged out successfully");
     }
-  }
+  };
 
   const updateProfile = async (profileData) => {
     try {
-      const response = await apiService.updateProfile(profileData)
-      setUser(response.user)
+      const response = await apiService.updateProfile(profileData);
+      setUser(response.user); // Immediately update user state
       toast.success("Profile updated successfully!");
-      return response
+      return response;
     } catch (error) {
       toast.error("Failed to update profile.");
-      throw error
+      throw error;
     }
-  }
+  };
 
   const value = {
     user,
@@ -91,7 +91,8 @@ export const AuthProvider = ({ children }) => {
     register,
     logout,
     updateProfile,
-  }
+    fetchCurrentUser,
+  };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
-}
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};

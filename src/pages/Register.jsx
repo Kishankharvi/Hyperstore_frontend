@@ -55,9 +55,9 @@ const Register = () => {
     }
   }
 
-  const handleGoogleLogin = () => {
-    window.location.href = `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/auth/google`
-  }
+ const handleGoogleLogin = () => {
+  window.location.href = `${import.meta.env.VITE_REACT_APP_API_URL || "http://localhost:5000"}/api/auth/google`
+}
 
   return (
     <div className="auth-page">
