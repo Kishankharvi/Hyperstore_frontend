@@ -46,7 +46,7 @@ const Login = () => {
   }
 
   const handleGoogleLogin = () => {
-  window.location.href = `${import.meta.env.VITE_REACT_APP_API_URL || "http://localhost:5000"}/api/auth/google`
+  window.location.href = `${import.meta.env.VITE_API_BASE_URL|| "http://localhost:5000"}/auth/google`
 }
   return (
     <div className="auth-page">
