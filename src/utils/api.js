@@ -1,7 +1,6 @@
-// filepath: frontend/src/utils/api.js
+// filepath: frontend/src/utils/api.js import.meta.env.VITE_REACT_APP_API_URL|| 
 
-const API_BASE_URL = import.meta.env.
-VITE_REACT_APP_API_URL|| "https://nexus-store-d2d4c8bb6f52.herokuapp.com/api" ;
+const API_BASE_URL = "https://nexus-store-d2d4c8bb6f52.herokuapp.com/api" ;
 console.log("API Base URL:", API_BASE_URL);
 
 if (!API_BASE_URL) {
