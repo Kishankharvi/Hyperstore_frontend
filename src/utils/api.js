@@ -1,6 +1,6 @@
 // filepath: frontend/src/utils/api.js
 
-const API_BASE_URL = import.meta.env.VITE_REACT_APP_API_URL|| "https://nexus-store-d2d4c8bb6f52.herokuapp.com";
+const API_BASE_URL ="https://nexus-store-d2d4c8bb6f52.herokuapp.com";
 console.log("API Base URL:", API_BASE_URL);
 class ApiService {
   constructor() {
