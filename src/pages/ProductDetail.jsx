@@ -5,6 +5,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import apiService from "../utils/api"
 import { CartContext } from "../utils/CartContext"
 import LoadingSpinner from "../components/LoadingSpinner"
+import toast from "react-hot-toast"
 import "../styles/ProductDetail.css"
 
 const ProductDetail = () => {
@@ -34,9 +35,20 @@ const ProductDetail = () => {
 
   const handleAddToCart = () => {
     if (product) {
-      addToCart({ ...product, id: product._id }, quantity)
-      setAddedToCart(true)
-      setTimeout(() => setAddedToCart(false), 2000)
+      if (navigator.onLine) {
+        addToCart({ ...product, id: product._id }, quantity)
+        setAddedToCart(true)
+        toast.success("Added to cart!");
+        setTimeout(() => setAddedToCart(false), 2000)
+      } else {
+        toast.error("You are offline. Your order will be placed once you're back online.");
+        // Save the request to be synced later
+        if ('serviceWorker' in navigator && 'SyncManager' in window) {
+          navigator.serviceWorker.ready.then(sw => {
+            sw.sync.register('sync-new-orders');
+          });
+        }
+      }
     }
   }
 
