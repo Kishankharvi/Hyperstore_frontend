@@ -352,455 +352,308 @@ npm run setup-env
 
 # Start both servers
 npm run dev
+```# Nexus Store 🚀
+
+A modern, futuristic e-commerce Progressive Web App (PWA) built with React and Node.js. Experience the future of online shopping with cutting-edge design and seamless functionality.
+
+![Nexus Store](./public/icons/icon-192x192.png)
+
+## ✨ Features
+
+### 🛍️ Core Shopping Experience
+- **Product Catalog**: Browse a curated selection of futuristic products
+- **Smart Search**: Search products by name with real-time filtering
+- **Shopping Cart**: Persistent cart that saves across sessions
+- **Secure Checkout**: Complete order processing with shipping management
+- **Order History**: Track your purchases and order status
+
+### 🔐 Authentication
+- **Dual Login System**: Email/password and Google OAuth 2.0
+- **User Profiles**: Manage personal information and shipping addresses
+- **Protected Routes**: Secure access to checkout and profile pages
+- **JWT Security**: Token-based authentication for API security
+
+### 📱 Progressive Web App
+- **Installable**: Add to home screen on mobile and desktop
+- **Offline Ready**: Core functionality works without internet
+- **Fast Loading**: Optimized caching strategies
+- **App-like Experience**: Native feel with modern web technologies
+
+### 🎨 Modern Design
+- **Futuristic Theme**: Cutting-edge visual design
+- **Responsive Layout**: Perfect on all devices
+- **Smooth Animations**: Engaging user interactions
+- **Dark Mode Ready**: Modern aesthetic with glassmorphism effects
+
+## 🛠️ Technology Stack
+
+### Frontend
+- **React 18.2** - Modern UI library with hooks
+- **Vite** - Next-generation frontend tooling
+- **React Router 6.30** - Client-side routing
+- **Context API** - State management for auth and cart
+- **Lucide React** - Beautiful icon system
+- **React Hot Toast** - User-friendly notifications
+- **Custom CSS** - Styled with modern design principles
+
+### Backend
+- **Node.js** - JavaScript runtime
+- **Express** - Web application framework
+- **MongoDB** - NoSQL database
+- **Mongoose** - Object Document Mapper
+- **JWT** - JSON Web Tokens for authentication
+- **Passport.js** - Authentication middleware
+- **bcrypt** - Password hashing
+- **CORS** - Cross-origin resource sharing
+
+### PWA Features
+- **Service Worker** - Offline functionality and caching
+- **Web App Manifest** - Installation and app metadata
+- **Cache-First Strategy** - Optimized loading performance
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js (v16 or higher)
+- MongoDB database
+- Google OAuth credentials (optional)
+
+### Installation
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/yourusername/nexus-store.git
+cd nexus-store
 ```
 
-### 📋 Detailed Installation
-
-#### Step 1: Clone and Setup
-
+2. **Install dependencies**
 ```bash
-# Clone the repository
-git clone https://github.com/username/hyper-store.git
-cd hyper-store
-
-# Check project structure
-ls -la
-```
-
-#### Step 2: Backend Configuration
-
-```bash
-# Navigate to backend
-cd backend
-
-# Install dependencies
+# Install frontend dependencies
 npm install
 
-# Create environment file
-cp .env.example .env
+# Install backend dependencies (if separate)
+cd backend && npm install
 ```
 
-Edit the `.env` file with your configuration:
+3. **Environment Setup**
 
+Create `.env` file in the root directory:
 ```env
-# Server Configuration
-PORT=5000
-NODE_ENV=development
+VITE_API_BASE_URL=http://localhost:5000/api
+```
 
-# Database
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/hyperstore?retryWrites=true&w=majority
-
-# Authentication
-JWT_SECRET=your-super-secret-jwt-key-here
-SESSION_SECRET=your-session-secret-here
-
-# Google OAuth
+For backend (if separate), create `.env`:
+```env
+MONGODB_URI=mongodb://localhost:27017/nexus-store
+JWT_SECRET=your-jwt-secret-key
 GOOGLE_CLIENT_ID=your-google-client-id
 GOOGLE_CLIENT_SECRET=your-google-client-secret
-
-# CORS
 CLIENT_URL=http://localhost:5173
-
-# Optional: Email service (for future features)
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_USER=your-email@gmail.com
-EMAIL_PASS=your-app-password
 ```
 
-#### Step 3: Database Setup
-
+4. **Start the development servers**
 ```bash
-# Seed the database with sample data
-npm run seed
-
-# Verify database connection
-npm run db:check
-```
-
-#### Step 4: Frontend Configuration
-
-```bash
-# Navigate to frontend
-cd ../frontend
-
-# Install dependencies
-npm install
-
-# Create environment file
-cp .env.example .env
-```
-
-Edit the frontend `.env` file:
-
-```env
-# API Configuration
-VITE_REACT_APP_API_URL=http://localhost:5000/api
-
-# App Configuration
-VITE_APP_NAME=Hyper Store
-VITE_APP_VERSION=1.0.0
-
-# Optional: Analytics (for future features)
-VITE_GA_TRACKING_ID=your-google-analytics-id
-```
-
-#### Step 5: Start Development Servers
-
-```bash
-# Option 1: Start both servers simultaneously (from root directory)
+# Start frontend
 npm run dev
 
-# Option 2: Start servers separately
-# Terminal 1 - Backend
-cd backend && npm run dev
-
-# Terminal 2 - Frontend
-cd frontend && npm run dev
+# Start backend (if separate)
+cd backend && npm start
 ```
 
-### 🔧 Development Scripts
-
-Add these scripts to your root `package.json`:
-
-```json
-{
-  "scripts": {
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cd backend && npm run dev",
-    "client": "cd frontend && npm run dev",
-    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install",
-    "build": "cd frontend && npm run build",
-    "test": "cd backend && npm test && cd ../frontend && npm test",
-    "seed": "cd backend && npm run seed",
-    "setup-env": "node scripts/setup-env.js"
-  }
-}
-```
-
-### ✅ Verify Installation
-
-1. **Backend Health Check**
-   ```bash
-   curl http://localhost:5000/api/health
-   # Expected: {"status": "OK", "timestamp": "..."}
-   ```
-
-2. **Frontend Access**
-   - Open browser to `http://localhost:5173`
-   - Verify the app loads without errors
-
-3. **Database Connection**
-   ```bash
-   cd backend && npm run db:status
-   # Expected: "Database connected successfully"
-   ```
-
----
+Visit `http://localhost:5173` to see the application.
 
 ## 📁 Project Structure
 
-### 🗂️ Root Directory Structure
-
 ```
-hyper-store/
-├── 📁 backend/                 # Server-side application
-├── 📁 frontend/                # Client-side application
-├── 📁 docs/                    # Documentation files
-├── 📁 scripts/                 # Utility scripts
-├── 📄 README.md               # This file
-├── 📄 package.json            # Root package configuration
-├── 📄 .gitignore              # Git ignore rules
-├── 📄 LICENSE                 # License file
-     
-```
-
-### 🖥️ Backend Structure
-
-```
-backend/
-├── 📁 config/
-│   ├── 📄 passport.js         # Authentication strategies
-├── 📁 middleware/
-│   ├── 📄 auth.js             # JWT verification
-├── 📁 models/
-│   ├── 📄 User.js             # User schema
-│   ├── 📄 Product.js          # Product schema
-│   ├── 📄 Order.js            # Order schema
-├── 📁 routes/
-│   ├── 📄 auth.js             # Authentication routes
-│   ├── 📄 products.js         # Product routes
-│   ├── 📄 orders.js           # Order routes
-│   ├── 📄 users.js            # User routes
-
-├── 📁 scripts/
-│   ├── 📄 seed.js             # Database seeding
-│   ├── 📄 seedData.js         # Seed data
-├── 📄 server.js               # Main server file
-├── 📄 app.js                  # Express app configuration
-├── 📄 package.json            # Dependencies and scripts
-└── 📄 .env                    # Environment variables
+nexus-store/
+├── public/
+│   ├── icons/              # PWA icons
+│   ├── manifest.json       # Web app manifest
+│   └── sw.js              # Service worker
+├── src/
+│   ├── components/        # Reusable React components
+│   │   ├── BottomNav.jsx
+│   │   ├── Header.jsx
+│   │   ├── LoadingSpinner.jsx
+│   │   ├── ProductCard.jsx
+│   │   └── SearchBar.jsx
+│   ├── pages/             # Page components
+│   │   ├── Home.jsx
+│   │   ├── ProductList.jsx
+│   │   ├── ProductDetail.jsx
+│   │   ├── Cart.jsx
+│   │   ├── Checkout.jsx
+│   │   ├── Login.jsx
+│   │   ├── Register.jsx
+│   │   ├── Profile.jsx
+│   │   └── AuthSuccess.jsx
+│   ├── utils/             # Utilities and contexts
+│   │   ├── api.js         # API service layer
+│   │   ├── AuthContext.jsx # Authentication state
+│   │   └── CartContext.jsx # Shopping cart state
+│   ├── styles/            # CSS files
+│   ├── App.jsx            # Main app component
+│   └── main.jsx           # Entry point
+├── package.json
+└── README.md
 ```
 
-### 🌐 Frontend Structure
+## 🔌 API Endpoints
 
-### 📚 Key File Explanations
+### Authentication
+- `POST /api/auth/register` - Create new account
+- `POST /api/auth/login` - User login
+- `GET /api/auth/me` - Get current user
+- `GET /api/auth/google` - Google OAuth login
 
-#### Backend Key Files
+### Products
+- `GET /api/products` - Get all products
+- `GET /api/products/:id` - Get single product
+- `POST /api/products` - Create product (Admin)
+- `PUT /api/products/:id` - Update product (Admin)
+- `DELETE /api/products/:id` - Delete product (Admin)
 
-- **`server.js`**: Main entry point, sets up Express server and middleware
-- **`config/passport.js`**: Configures Google OAuth and local authentication strategies
-- **`middleware/auth.js`**: JWT verification middleware for protected routes
-- **`models/User.js`**: User schema with password hashing and validation
-- **`routes/products.js`**: Product CRUD operations with search and filtering
-- **`scripts/seed.js`**: Populates database with sample products and users
+### Orders
+- `POST /api/orders` - Create new order
+- `GET /api/orders/my-orders` - Get user orders
+- `GET /api/orders/:id` - Get single order
 
-#### Frontend Key Files
+### Users
+- `GET /api/users/profile` - Get user profile
+- `PUT /api/users/profile` - Update user profile
 
-- **`App.jsx`**: Root component with routing and context providers
-- **`utils/api.js`**: Centralized API client with interceptors and error handling
-- **`context/AuthContext.jsx`**: Global authentication state management
-- **`context/CartContext.jsx`**: Shopping cart state with localStorage persistence
-- **`public/sw.js`**: Service worker for PWA functionality and caching
-- **`public/manifest.json`**: PWA manifest for installability
+## 💾 Data Models
+
+### User
+```javascript
+{
+  name: String,
+  email: String,
+  password: String (hashed),
+  role: String (user/admin),
+  address: {
+    street: String,
+    city: String,
+    state: String,
+    zipCode: String,
+    country: String
+  },
+  googleId: String (optional)
+}
+```
+
+### Product
+```javascript
+{
+  name: String,
+  description: String,
+  price: Number,
+  image: String,
+  category: String,
+  stock: Number,
+  inStock: Boolean,
+  features: [String]
+}
+```
+
+### Order
+```javascript
+{
+  user: ObjectId,
+  items: [{
+    product: ObjectId,
+    quantity: Number,
+    price: Number
+  }],
+  total: Number,
+  status: String,
+  shippingAddress: Object,
+  createdAt: Date
+}
+```
+
+## 🎯 Key Features Explained
+
+### Progressive Web App
+The application implements full PWA capabilities:
+- **Service Worker**: Caches static assets and provides offline functionality
+- **Web App Manifest**: Enables installation on devices
+- **Responsive Design**: Works perfectly on all screen sizes
+
+### State Management
+- **AuthContext**: Manages user authentication state globally
+- **CartContext**: Handles shopping cart operations with localStorage persistence
+- **React Router**: Provides seamless navigation without page reloads
+
+### Security
+- **JWT Authentication**: Secure token-based authentication
+- **Protected Routes**: Conditional access based on authentication status
+- **Password Hashing**: bcrypt for secure password storage
+- **CORS Configuration**: Proper cross-origin request handling
+
+## 🚀 Deployment
+
+### Frontend (Netlify/Vercel)
+1. Build the project: `npm run build`
+2. Deploy the `dist` folder
+3. Set environment variable: `VITE_API_BASE_URL`
+
+### Backend (Heroku/Railway)
+1. Set up MongoDB database
+2. Configure environment variables
+3. Deploy Node.js application
+
+### Environment Variables
+```env
+# Frontend
+VITE_API_BASE_URL=https://your-api-domain.com/api
+
+# Backend
+MONGODB_URI=mongodb+srv://...
+JWT_SECRET=your-secret-key
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+CLIENT_URL=https://your-frontend-domain.com
+```
+
+## 🧪 Testing
+
+```bash
+# Run tests
+npm test
+
+# Run linting
+npm run lint
+
+# Build for production
+npm run build
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **React Team** - For the amazing framework
+- **Vite Team** - For blazing fast build tools
+- **Lucide** - For beautiful icons
+- **MongoDB** - For flexible database solutions
+
+## 📞 Support
+
+For support, email kishan@nexusstore.com or join our Slack channel.
 
 ---
 
-## 🔐 Authentication System
+**Made with ❤️ by Kishan**
 
-### 🏗️ Authentication Architecture
-
-The authentication system supports both local and social login methods with JWT-based session management.
-
-```mermaid
-graph TD
-    A[User] --> B{Login Method}
-    B -->|Email/Password| C[Local Auth]
-    B -->|Google OAuth| D[Google Auth]
-    
-    C --> E[Validate Credentials]
-    D --> F[OAuth Flow]
-    
-    E -->|Valid| G[Generate JWT]
-    E -->|Invalid| H[Return Error]
-    F -->|Success| G
-    F -->|Failed| H
-    
-    G --> I[Return Token]
-    I --> J[Store in Frontend]
-    J --> K[Include in API Requests]
-    
-    H --> L[Show Error Message]
-```
-
-### 📝 Local Authentication Flow
-
-#### Registration Process
-
-```javascript
-// Frontend - Registration
-const register = async (userData) => {
-  try {
-    const response = await api.post('/auth/register', {
-      name: userData.name,
-      email: userData.email,
-      password: userData.password
-    });
-    
-    const { token, user } = response.data;
-    localStorage.setItem('token', token);
-    setAuthState({ user, token, isAuthenticated: true });
-    
-    toast.success('Registration successful!');
-    navigate('/dashboard');
-  } catch (error) {
-    toast.error(error.response.data.message);
-  }
-};
-```
-
-```javascript
-// Backend - Registration Handler
-const register = async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
-    
-    // Check if user already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
-    }
-    
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 12);
-    
-    // Create user
-    const user = new User({
-      name,
-      email,
-      password: hashedPassword
-    });
-    
-    await user.save();
-    
-    // Generate JWT
-    const token = jwt.sign(
-      { userId: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: '7d' }
-    );
-    
-    res.status(201).json({
-      message: 'User created successfully',
-      token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email
-      }
-    });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-};
-```
-
-#### Login Process
-
-```javascript
-// Frontend - Login
-const login = async (credentials) => {
-  try {
-    const response = await api.post('/auth/login', credentials);
-    const { token, user } = response.data;
-    
-    localStorage.setItem('token', token);
-    setAuthState({ user, token, isAuthenticated: true });
-    
-    toast.success(`Welcome back, ${user.name}!`);
-    navigate('/dashboard');
-  } catch (error) {
-    toast.error(error.response.data.message);
-  }
-};
-```
-
-### 🔗 Google OAuth Integration
-
-#### OAuth Configuration
-
-```javascript
-// config/passport.js
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-
-passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "/api/auth/google/callback"
-}, async (accessToken, refreshToken, profile, done) => {
-  try {
-    // Check if user already exists
-    let user = await User.findOne({ googleId: profile.id });
-    
-    if (user) {
-      return done(null, user);
-    }
-    
-    // Check if user exists with same email
-    user = await User.findOne({ email: profile.emails[0].value });
-    
-    if (user) {
-      // Link Google account
-      user.googleId = profile.id;
-      await user.save();
-      return done(null, user);
-    }
-    
-    // Create new user
-    user = new User({
-      googleId: profile.id,
-      name: profile.displayName,
-      email: profile.emails[0].value,
-      avatar: profile.photos[0].value
-    });
-    
-    await user.save();
-    done(null, user);
-  } catch (error) {
-    done(error, null);
-  }
-}));
-```
-
-#### OAuth Routes
-
-```javascript
-// routes/auth.js
-// Initiate Google OAuth
-router.get('/google', 
-  passport.authenticate('google', { scope: ['profile', 'email'] })
-);
-
-// Google OAuth callback
-router.get('/google/callback',
-  passport.authenticate('google', { session: false }),
-  (req, res) => {
-    const token = jwt.sign(
-      { userId: req.user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: '7d' }
-    );
-    
-    // Redirect to frontend with token
-    res.redirect(`${process.env.CLIENT_URL}/auth/success?token=${token}`);
-  }
-);
-```
-
-### 🛡️ JWT Middleware
-
-```javascript
-// middleware/auth.js
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-
-const authMiddleware = async (req, res, next) => {
-  try {
-    const token = req.header('Authorization')?.replace('Bearer ', '');
-    
-    if (!token) {
-      return res.status(401).json({ message: 'No token provided' });
-    }
-    
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.userId).select('-password');
-    
-    if (!user) {
-      return res.status(401).json({ message: 'Invalid token' });
-    }
-    
-    req.user = user;
-    next();
-  } catch (error) {
-    if (error.name === 'TokenExpiredError') {
-      return res.status(401).json({ message: 'Token expired' });
-    }
-    res.status(401).json({ message: 'Invalid token' });
-  }
-};
-
-module.exports = authMiddleware;
-```
-
-### 🔄 Token Refresh Strategy
-
-```javascript
-// utils/api.js - Frontend API client with auto-refresh
-import axios from 'axios';
-
-const api = axios.create({
-  baseURL: import.meta.env.VITE_REACT_APP_API_URL
-});
-
-// Request interceptor to add token
-api.intercept
+*Experience the future of e-commerce with Nexus Store*
