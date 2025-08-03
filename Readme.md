@@ -512,7 +512,7 @@ hyper-store/
 ├── 📄 package.json            # Root package configuration
 ├── 📄 .gitignore              # Git ignore rules
 ├── 📄 LICENSE                 # License file
-└── 📄 docker-compose.yml      # Docker configuration
+     
 ```
 
 ### 🖥️ Backend Structure
@@ -520,42 +520,22 @@ hyper-store/
 ```
 backend/
 ├── 📁 config/
-│   ├── 📄 database.js         # Database configuration
 │   ├── 📄 passport.js         # Authentication strategies
-│   └── 📄 cloudinary.js       # Image upload config
-├── 📁 controllers/
-│   ├── 📄 authController.js   # Authentication logic
-│   ├── 📄 productController.js # Product operations
-│   ├── 📄 orderController.js  # Order management
-│   └── 📄 userController.js   # User management
 ├── 📁 middleware/
 │   ├── 📄 auth.js             # JWT verification
-│   ├── 📄 validation.js       # Input validation
-│   ├── 📄 errorHandler.js     # Error handling
-│   └── 📄 rateLimit.js        # Rate limiting
 ├── 📁 models/
 │   ├── 📄 User.js             # User schema
 │   ├── 📄 Product.js          # Product schema
 │   ├── 📄 Order.js            # Order schema
-│   └── 📄 Category.js         # Category schema
 ├── 📁 routes/
 │   ├── 📄 auth.js             # Authentication routes
 │   ├── 📄 products.js         # Product routes
 │   ├── 📄 orders.js           # Order routes
 │   ├── 📄 users.js            # User routes
-│   └── 📄 admin.js            # Admin routes
+
 ├── 📁 scripts/
 │   ├── 📄 seed.js             # Database seeding
 │   ├── 📄 seedData.js         # Seed data
-│   └── 📄 migrate.js          # Database migrations
-├── 📁 tests/
-│   ├── 📄 auth.test.js        # Authentication tests
-│   ├── 📄 products.test.js    # Product tests
-│   └── 📄 orders.test.js      # Order tests
-├── 📁 utils/
-│   ├── 📄 logger.js           # Logging utility
-│   ├── 📄 email.js            # Email service
-│   └── 📄 helpers.js          # Helper functions
 ├── 📄 server.js               # Main server file
 ├── 📄 app.js                  # Express app configuration
 ├── 📄 package.json            # Dependencies and scripts
@@ -563,83 +543,6 @@ backend/
 ```
 
 ### 🌐 Frontend Structure
-
-```
-frontend/
-├── 📁 public/
-│   ├── 📁 icons/              # PWA icons (multiple sizes)
-│   │   ├── 📄 icon-192x192.png
-│   │   ├── 📄 icon-512x512.png
-│   │   └── 📄 favicon.ico
-│   ├── 📁 images/             # Static images
-│   │   ├── 📄 hero-bg.jpg
-│   │   ├── 📄 logo.png
-│   │   └── 📁 products/       # Product images
-│   ├── 📄 manifest.json       # PWA manifest
-│   ├── 📄 sw.js               # Service worker
-│   └── 📄 robots.txt          # SEO robots file
-├── 📁 src/
-│   ├── 📁 components/         # Reusable components
-│   │   ├── 📁 common/         # Common UI components
-│   │   │   ├── 📄 Header.jsx
-│   │   │   ├── 📄 Footer.jsx
-│   │   │   ├── 📄 Loading.jsx
-│   │   │   └── 📄 Modal.jsx
-│   │   ├── 📁 product/        # Product-related components
-│   │   │   ├── 📄 ProductCard.jsx
-│   │   │   ├── 📄 ProductList.jsx
-│   │   │   └── 📄 ProductFilter.jsx
-│   │   ├── 📁 cart/           # Cart components
-│   │   │   ├── 📄 CartItem.jsx
-│   │   │   ├── 📄 CartSummary.jsx
-│   │   │   └── 📄 Checkout.jsx
-│   │   └── 📁 auth/           # Authentication components
-│   │       ├── 📄 LoginForm.jsx
-│   │       ├── 📄 RegisterForm.jsx
-│   │       └── 📄 ProfileForm.jsx
-│   ├── 📁 pages/              # Page components
-│   │   ├── 📄 Home.jsx        # Homepage
-│   │   ├── 📄 Products.jsx    # Product listing
-│   │   ├── 📄 ProductDetail.jsx # Single product
-│   │   ├── 📄 Cart.jsx        # Shopping cart
-│   │   ├── 📄 Checkout.jsx    # Checkout process
-│   │   ├── 📄 Profile.jsx     # User profile
-│   │   ├── 📄 Orders.jsx      # Order history
-│   │   ├── 📄 Login.jsx       # Login page
-│   │   ├── 📄 Register.jsx    # Registration page
-│   │   └── 📄 NotFound.jsx    # 404 page
-│   ├── 📁 hooks/              # Custom React hooks
-│   │   ├── 📄 useAuth.js      # Authentication hook
-│   │   ├── 📄 useCart.js      # Cart management hook
-│   │   ├── 📄 useApi.js       # API request hook
-│   │   └── 📄 useLocalStorage.js # Local storage hook
-│   ├── 📁 context/            # React contexts
-│   │   ├── 📄 AuthContext.jsx # Authentication context
-│   │   ├── 📄 CartContext.jsx # Cart context
-│   │   └── 📄 ThemeContext.jsx # Theme context
-│   ├── 📁 utils/              # Utility functions
-│   │   ├── 📄 api.js          # API client
-│   │   ├── 📄 constants.js    # App constants
-│   │   ├── 📄 helpers.js      # Helper functions
-│   │   └── 📄 validators.js   # Form validators
-│   ├── 📁 styles/             # Styling files
-│   │   ├── 📄 globals.css     # Global styles
-│   │   ├── 📄 variables.css   # CSS variables
-│   │   ├── 📄 components.css  # Component styles
-│   │   └── 📄 responsive.css  # Responsive styles
-│   ├── 📁 assets/             # Static assets
-│   │   ├── 📁 icons/          # SVG icons
-│   │   ├── 📁 fonts/          # Custom fonts
-│   │   └── 📁 animations/     # Animation files
-│   ├── 📄 App.jsx             # Root component
-│   ├── 📄 main.jsx            # Application entry
-│   └── 📄 index.css           # Base styles
-├── 📄 index.html              # HTML template
-├── 📄 vite.config.js          # Vite configuration
-├── 📄 package.json            # Dependencies
-├── 📄 .env                    # Environment variables
-└── 📄 .eslintrc.js            # ESLint configuration
-```
 
 ### 📚 Key File Explanations
 
