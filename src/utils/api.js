@@ -1,11 +1,12 @@
 // filepath: frontend/src/utils/api.js 
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL|| "https://nexus-store-d2d4c8bb6f52.herokuapp.com/api" ;
-console.log("API Base URL:", API_BASE_URL);
-
 if (!API_BASE_URL) {
   throw new Error("REACT_APP_API_URL is not defined in the environment variables.");
 }
+console.log("API Base URL:", API_BASE_URL);
+
+
 class ApiService {
   constructor() {
     this.token = localStorage.getItem("token");
